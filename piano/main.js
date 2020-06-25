@@ -3,19 +3,24 @@ let keys = document.querySelectorAll(".key");
 
 
 function playNote(event) {
-    // key code
+
+    let audioKeyCode = getKeyCode(event)
+
+}
+
+function getKeyCode(event){
 
     let keyCode;
 
     const iskeyboard = event.type === 'keydown'
     if(iskeyboard) {
+        keyCode = event.keyCode
 
+    }else {
+        keyCode = event.target.key
     }
-    console.log(event.keyCode)
-    // typed or pressed key
-
-    // if key exists
-
+    
+    return keyCode
 }
 
 keys.forEach( function(key){
