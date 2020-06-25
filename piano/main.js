@@ -11,7 +11,8 @@ function playNote(event) {
     if(cantFoundAnyKey) {
         return;
     }
-    playAudio(audioKeyCode);
+    addPlayingClass(key)
+    playAudio(audioKeyCode)
 
 }
 
@@ -20,6 +21,9 @@ function playAudio(audioKeyCode){
     audio,currentTime = 0
     audio.play();
 
+}
+function addPlayingClass(key) {
+    key.classList.add('playing')
 }
 function getKeyCode(event){
 
@@ -35,9 +39,17 @@ function getKeyCode(event){
     
     return keyCode
 }
+function removePlayinClass(event) {
+    event.target.classList.remove("playing") 
+}
+function registerEvents(){
 
-keys.forEach( function(key){
-    key.addEventListener('click', playNote);
-});
+    keys.forEach( function(key){
+        key.addEventListener('click', playNote);
+        key.addEventListener('transitionend', removePlayinClass);
+    });
+    
+    window.addEventListener('keydown', playNote);
+}
 
-window.addEventListener('keydown', playNote);
+window.addEventListener('load', registerEvents)
